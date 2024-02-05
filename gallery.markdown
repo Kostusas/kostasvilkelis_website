@@ -37,7 +37,7 @@ Photos
 <body>
 
 <div id="main-image" onclick="openRandomImage()">
-  <img src="/kostasvilkelis_website/images/bouldering.png" alt="Main Image" id="base-image">
+  <img src="https://iarayad.github.io/kostasvilkelis_website/images/bouldering.png" alt="Main Image" id="base-image">
 </div>
 
 <script>
