@@ -8,14 +8,26 @@ Photos
 
 <style>
   .image-gallery {
-    display: flex; /* Use flexbox to display images in a row */
-    flex-wrap: wrap; /* Allow images to wrap to the next line if there's not enough space */
-    justify-content: space-between; /* Add space between images */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 
   .box {
-    /* Optional: Add styling for each image container */
-    margin-bottom: 10px; /* Adjust margin between image containers */
+    border: 2px solid #ddd; /* Add a border to each image container */
+    margin-bottom: 20px;
+    padding: 10px; /* Add padding for spacing within the container */
+    box-sizing: border-box; /* Include padding and border in the box's total width and height */
+  }
+
+  .box a {
+    display: block; /* Make the link fill the entire box */
+  }
+
+  .img-gallery {
+    width: 100%; /* Make the image fill its container */
+    height: auto; /* Maintain the aspect ratio */
+    border-radius: 8px; /* Add rounded corners to the images */
   }
 </style>
 
