@@ -38,7 +38,7 @@ Photos
 <body>
 
 <div id="main-image" onclick="openRandomImage()">
-  <img src="path/to/bouldering.png" alt="Main Image" id="base-image">
+  <img src="kostasvilkelis_website/images/bouldering.png" alt="Main Image" id="base-image">
 </div>
 
 <script>
@@ -51,7 +51,7 @@ Photos
     var randomImage = imageArray[Math.floor(Math.random() * imageArray.length)];
 
     // Open the random image in a new browser window or tab
-    window.open('path/to/images/' + randomImage, '_blank');
+    window.open('kostasvilkelis_website/images/' + randomImage, '_blank');
   }
 </script>
 
