@@ -6,42 +6,55 @@ permalink: /photo-gallery/
 
 Photos
 
-<style>
-  .image-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Gallery</title>
+  <style>
+    #main-image {
+      position: relative;
+      cursor: pointer;
+    }
 
-  .box {
-    border: 2px solid #ddd; /* Add a border to each image container */
-    margin-bottom: 20px;
-    padding: 10px; /* Add padding for spacing within the container */
-    box-sizing: border-box; /* Include padding and border in the box's total width and height */
-  }
+    #main-image:hover::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+    }
 
-  .box a {
-    display: block; /* Make the link fill the entire box */
-  }
+    #base-image {
+      display: block;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
 
-  .img-gallery {
-    width: 100%; /* Make the image fill its container */
-    height: auto; /* Maintain the aspect ratio */
-    border-radius: 8px; /* Add rounded corners to the images */
-  }
-</style>
-
-<div class="image-gallery">
-    {% assign sorted = site.static_files | sort: 'date' | reverse %}
-    {% for file in sorted %}
-        {% if file.path contains "images" %}
-            {% if file.extname == '.png' %}
-                {% assign filenameparts = file.path | split: "/" %}
-                {% assign filename = filenameparts | last | replace: file.extname,"" %}
-                <div class="box"><a href="{{ file.path | relative_url }}" title="{{ filename }}">
-                    <img src="{{ site.thumbsurl }}thumb.{{file.name }} " alt="{{ filename }}" class="img-gallery" />
-                </a></div>
-            {% endif %}
-        {% endif %}
-    {% endfor %}
+<div id="main-image" onclick="openRandomImage()">
+  <img src="path/to/bouldering.png" alt="Main Image" id="base-image">
 </div>
+
+<script>
+  function openRandomImage() {
+    // Array of image filenames in the 'images' folder
+    var imageArray = ['Photo_Paris.png', 'Group_picture.png', 'Peace_at_veldhoven.png
+', 'Kostas_spot.png'];
+
+    // Get a random image filename from the array
+    var randomImage = imageArray[Math.floor(Math.random() * imageArray.length)];
+
+    // Open the random image in a new browser window or tab
+    window.open('path/to/images/' + randomImage, '_blank');
+  }
+</script>
+
+</body>
+</html>
+
