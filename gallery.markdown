@@ -58,7 +58,7 @@ Photos
     // Get a random image filename from the array
     var randomImage = imageArray[Math.floor(Math.random() * imageArray.length)];
 
-    window.open('[https://iarayad.github.io/kostasvilkelis_website/images/' + randomImage, '_blank');
+    window.open('https://iarayad.github.io/kostasvilkelis_website/images/' + randomImage, '_blank');
 
 
   }
