@@ -37,7 +37,7 @@ Photos
 <body>
 
 <div id="main-image" onclick="openRandomImage()">
-  <img src="images/bouldering.png" alt="Main Image" id="base-image">
+  <img src="iarayad/kostasvilkelis_website/images/bouldering.png" alt="Main Image" id="base-image">
 </div>
 
 <script>
@@ -58,8 +58,9 @@ Photos
     // Get a random image filename from the array
     var randomImage = imageArray[Math.floor(Math.random() * imageArray.length)];
 
-    // Open the random image in a new browser window or tab
-    window.open('images/' + randomImage, '_blank');
+    <div class="box"><a href="{{ file.path | relative_url }}" title="{{ filename }}">
+                    <img src="{{ site.thumbsurl }}thumb.{{file.name }} " alt="{{ filename }}" class="img-gallery" />
+                </a></div>
   }
 </script>
 
