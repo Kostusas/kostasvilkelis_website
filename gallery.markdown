@@ -5,7 +5,6 @@ permalink: /photo-gallery/
 ---
 
 Photos
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,20 +37,29 @@ Photos
 <body>
 
 <div id="main-image" onclick="openRandomImage()">
-  <img src="kostasvilkelis_website/blob/main/images/AI_1.png" alt="Main Image" id="base-image">
+  <img src="images/bouldering.png" alt="Main Image" id="base-image">
 </div>
 
 <script>
   function openRandomImage() {
     // Array of image filenames in the 'images' folder
-    var imageArray = ['Photo_Paris.png', 'Group_picture.png', 'Peace_at_veldhoven.png
-', 'Kostas_spot.png'];
+    var imageArray = [
+      {% assign sorted = site.static_files | sort: 'date' | reverse %}
+      {% for file in sorted %}
+        {% if file.path contains "images" and file.extname == '.png' %}
+          "{{ file.name }}",
+        {% endif %}
+      {% endfor %}
+    ];
+
+    // Remove the trailing comma from the last element in the array
+    imageArray[imageArray.length - 1] = imageArray[imageArray.length - 1].replace(/,\s*$/, "");
 
     // Get a random image filename from the array
     var randomImage = imageArray[Math.floor(Math.random() * imageArray.length)];
 
     // Open the random image in a new browser window or tab
-    window.open('kostasvilkelis_website/images/' + randomImage, '_blank');
+    window.open('images/' + randomImage, '_blank');
   }
 </script>
 
