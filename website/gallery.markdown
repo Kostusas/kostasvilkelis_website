@@ -6,4 +6,17 @@ permalink: /photo-gallery/
 
 Photos
 
-{% include photo-gallery.html folder="images" %}
+<div class ="image-gallery">
+    {% assign sorted = site.static_files | sort: 'date' | reverse %}
+    {% for file in sorted %}
+    {% if file.path contains include.images %}
+    {% if file.extname == '.png' %}
+      {% assign filenameparts = file.path | split: "/" %}
+        {% assign filename = filenameparts | last | replace: file.extname,"" %}
+         <div class="box"><a href="{{ file.path | relative_url }}" title="{{ filename }}">
+           <img src="{{ site.thumbsurl }}thumb.{{file.name }} " alt="{{ filename }}"  class="img-gallery" />
+         </a></div>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+</div>
