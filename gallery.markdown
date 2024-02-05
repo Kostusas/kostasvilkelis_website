@@ -4,7 +4,26 @@ title: Photo Gallery
 permalink: /photo-gallery/
 ---
 
-Photos
+Your time in the group has been amazing, 
+with many jumbo basket sized brain ideas aplenty, 
+as a little look back, 
+click on the basket for history!
+
+---- Or the ChatGPT version ---
+In the realm of wisdom, your presence bright,
+A journey shared, a collaborative light.
+Amidst the halls of ideas, jumbo-sized and grand,
+Basketful of brilliance, a treasure trove so grand.
+
+A click, a glance, a moment to explore,
+History unfolds, memories to adore.
+With each basket tapped, a tale unfurls,
+In the tapestry of camaraderie, laughter swirls.
+
+Oh, cherished member, in this PhD rhyme,
+Together we've soared, an incredible climb.
+To the basket we return, a nod to our jest,
+A poetic pause, a shared joy, the very best.
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +56,7 @@ Photos
 <body>
 
 <div id="main-image" onclick="openRandomImage()">
-  <img src="https://iarayad.github.io/kostasvilkelis_website/images/bouldering.png" alt="Main Image" id="base-image">
+  <img src="https://iarayad.github.io/kostasvilkelis_website/images/big_jumbo.jpeg" alt="Main Image" id="base-image">
 </div>
 
 <script>
