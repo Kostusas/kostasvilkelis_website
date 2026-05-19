@@ -1,0 +1,326 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/ui/Icon.astro";
+import { PAGES } from "../../config";
+
+if (PAGES.projects.isActive === false) {
+    return Astro.redirect("/404");
+}
+
+type CodeLink = {
+    label: string;
+    href: string;
+    kind?: "github" | "gitlab" | "docs" | "package" | "archive" | "external";
+};
+
+type CodeProject = {
+    title: string;
+    role: string;
+    description: string;
+    stack: string[];
+    status?: string;
+    href?: string;
+    links?: CodeLink[];
+};
+
+const sourceLinks: CodeLink[] = [
+    { label: "GitHub", href: "https://github.com/Kostusas", kind: "github" },
+    { label: "VU GitLab", href: "https://git.labs.vu.nl/itvo", kind: "gitlab" },
+    { label: "Kwant GitLab", href: "https://gitlab.kwant-project.org", kind: "gitlab" },
+    { label: "Zenodo", href: "https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Vilkelis%2C%20Kostas%22&l=list&p=1&s=10&sort=bestmatch", kind: "archive" },
+];
+
+const getLinkIcon = (link: CodeLink) => {
+    if (link.kind === "github" || link.href.includes("github.com")) return "Github";
+    if (link.kind === "gitlab" || link.href.includes("gitlab")) return "GitLab";
+    if (link.kind === "docs" || link.label.toLowerCase().includes("docs")) return "Book";
+    if (link.kind === "package" || link.href.includes("pypi.org")) return "Package";
+    if (link.kind === "archive" || link.href.includes("zenodo.org")) return "Archive";
+    return "ExternalLink";
+};
+
+const researchSoftware: CodeProject[] = [
+    {
+        title: "MeanFi",
+        role: "Lead developer",
+        description:
+            "Mean-field calculations for tight-binding models & device simulations. Current work on v2 focuses on numerical backend overhaul and additional features.",
+        stack: ["Python", "Scientific computing", "Computational physics"],
+        status: "Active",
+        href: "/projects/meanfi/",
+        links: [
+            { label: "Kwant GitLab", href: "https://gitlab.kwant-project.org/qt/meanfi", kind: "gitlab" },
+            { label: "v2 branch", href: "https://gitlab.kwant-project.org/qt/meanfi/-/tree/meanfi-v2?ref_type=heads", kind: "gitlab" },
+            { label: "Docs", href: "https://qt.pages.quantumtinkerer.group/meanfi/build/html/index.html", kind: "docs" },
+            { label: "PyPI", href: "https://pypi.org/project/meanfi/", kind: "package" },
+        ],
+    },
+    {
+        title: "pyDACP",
+        role: "Lead developer",
+        description:
+            "Python package for eigenvalue computations using the dual applications of Chebyshev polynomials algorithm.",
+        stack: ["Python", "Eigenvalue problems", "Numerical linear algebra"],
+        links: [
+            { label: "Kwant GitLab", href: "https://gitlab.kwant-project.org/qt/pyDACP", kind: "gitlab" },
+            { label: "PyPI", href: "https://pypi.org/project/pyDACP/", kind: "package" },
+        ],
+    },
+    {
+        title: "AdaptiveSimplex",
+        role: "Lead developer",
+        description:
+            "Adaptive simplex integration tooling factored out of the MeanFi v2 work so the integration machinery can be tested and reused independently.",
+        stack: ["C++", "Integration", "Algorithms"],
+        status: "Active",
+        href: "/projects/adaptivesimplex/",
+        links: [
+            { label: "Kwant GitLab", href: "https://gitlab.kwant-project.org/qt/adaptivesimplex", kind: "gitlab" },
+        ],
+    },
+    {
+        title: "stateful_quadrature",
+        role: "Lead developer",
+        description:
+            "Quadrature integrator inspired by SciPy cubature, with stateful reuse of integral evaluations for expensive numerical workflows.",
+        stack: ["Python", "Quadrature", "Numerical methods"],
+        status: "Active",
+        href: "/projects/stateful-quadrature/",
+        links: [
+            { label: "GitHub", href: "https://github.com/Kostusas/stateful_quadrature", kind: "github" },
+            { label: "PyPI", href: "https://pypi.org/project/stateful-quadrature/", kind: "package" },
+        ],
+    },
+];
+
+const vuEngineering: CodeProject[] = [
+    {
+        title: "Feed4Food",
+        role: "Developer",
+        description:
+            "Website and tooling for an initiative around sustainable produce tracking in gardens.",
+        stack: ["Web", "Research support", "Sustainability"],
+        links: [{ label: "GitHub", href: "https://github.com/Ilydocus/feed4food", kind: "github" }],
+    },
+    {
+        title: "GardenNDVI",
+        role: "Lead developer",
+        description:
+            "Processing terabytes of aerial infrared imagery for spatial economics research.",
+        stack: ["Large data", "Geospatial imagery", "Reproducible workflows"],
+        links: [{ label: "GitHub", href: "https://github.com/LynnBouwknegt/gardennvdi", kind: "github" }],
+    },
+    {
+        title: "In Silico Framework on ADA",
+        role: "Support for porting to ADA",
+        description:
+            "Transitioning and adapting a neuroscience simulation stack to run on VU's ADA HPC environment.",
+        stack: ["HPC", "Simulation", "Python environments"],
+        links: [
+            { label: "GitHub", href: "https://github.com/mpinb/in_silico_framework", kind: "github" },
+            { label: "Docs", href: "https://mpinb.github.io/in_silico_framework/", kind: "docs" },
+        ],
+    },
+    {
+        title: "Metabolomics workflows",
+        role: "Reproducibility/performance consulting",
+        description:
+            "Contributions and workflow experiments for making metabolomics projects efficient, reproducible, and easier to run on shared infrastructure.",
+        stack: ["Python", "LC-MS", "Workflow design"],
+        status: "Active",
+        links: [
+            { label: "Asari guide", href: "https://github.com/Kostusas/asari-metabolomics-guide", kind: "github" },
+        ],
+    },
+];
+
+const hpcInfrastructure: CodeProject[] = [
+    {
+        title: "ADA HPC automation",
+        role: "Lead Developer",
+        description:
+            "GitLab CI/CD pipeline work for creating cluster images, initiating cluster setup, and connecting the workflow to OpenNebula-managed virtual machines.",
+        stack: ["GitLab CI/CD", "OpenHPC", "OpenNebula", "Warewulf"],
+        status: "Active",
+        links: [
+            { label: "headnode-image", href: "https://git.labs.vu.nl/itvo/ada-hpc/headnode-image", kind: "gitlab" },
+            { label: "openhpc-setup", href: "https://git.labs.vu.nl/itvo/ada-hpc/openhpc-setup", kind: "gitlab" },
+            { label: "ww-images", href: "https://git.labs.vu.nl/itvo/ada-hpc/ww-images", kind: "gitlab" },
+        ],
+    },
+    {
+        title: "dask-quantumtinkerer",
+        role: "Lead developer",
+        description:
+            "Workflow-specific Dask integration for connecting Quantum Tinkerer group notebooks and workloads to HPC resources.",
+        stack: ["Python", "Dask", "HPC"],
+        links: [{ label: "Kwant GitLab", href: "https://gitlab.kwant-project.org/qt/dask-quantumtinkerer", kind: "gitlab" }],
+    },
+    {
+        title: "Open OnDemand apps",
+        role: "Developer",
+        description:
+            "Public VU components for Jupyter and Code Server apps used in browser-based HPC workflows.",
+        stack: ["Open OnDemand", "Jupyter", "Code Server"],
+        links: [
+            { label: "Jupyter app", href: "https://git.labs.vu.nl/itvo/ondemand-apps/jupyter", kind: "gitlab" },
+            { label: "Code Server app", href: "https://git.labs.vu.nl/itvo/ondemand-apps/codeserver", kind: "gitlab" },
+        ],
+    },
+];
+
+const publicContributions = [
+    { group: "Kwant / Quantum Tinkerer", name: "qt/pymablock", href: "https://gitlab.kwant-project.org/qt/pymablock", note: "Perturbation theory tooling" },
+    { group: "Kwant / Quantum Tinkerer", name: "grenoble/pescado", href: "https://gitlab.kwant-project.org/grenoble/pescado", note: "Scientific computing support" },
+    { group: "Kwant / Quantum Tinkerer", name: "qt/cluster-logger", href: "https://gitlab.kwant-project.org/qt/cluster-logger", note: "Cluster workflow tooling" },
+    { group: "Kwant / Quantum Tinkerer", name: "kwant/python-mumps", href: "https://gitlab.kwant-project.org/kwant/python-mumps", note: "Solver packaging" },
+    { group: "Kwant / Quantum Tinkerer", name: "qt/research-docker", href: "https://gitlab.kwant-project.org/qt/research-docker", note: "Research containers" },
+    { group: "VU / broader OSS", name: "open-handbook", href: "https://github.com/ubvu/open-handbook", note: "Research data management handbook" },
+];
+
+---
+
+<BaseLayout title={PAGES.projects.title}>
+    <header class="page-header code-header">
+        <h1 class="page-title">{PAGES.projects.title}</h1>
+        <p class="page-subtitle">
+            Public code and research software work that I can share.
+        </p>
+        <div class="code-source-links" aria-label="Code profiles">
+            {sourceLinks.map((link) => (
+                <a href={link.href} target="_blank" rel="noopener noreferrer">
+                    <Icon name={getLinkIcon(link)} size={14} />
+                    <span>{link.label}</span>
+                </a>
+            ))}
+        </div>
+    </header>
+
+    <section class="code-section">
+        <div class="code-section-heading">
+            <h2>Research Code</h2>
+            <p>Personal research software projects for computational physics, numerical methods, and scientific Python.</p>
+        </div>
+        <div class="code-grid code-grid-primary">
+            {researchSoftware.map((project) => (
+                <article class="code-card code-card-primary">
+                    <div class="code-card-top">
+                        <div>
+                            {project.href ? (
+                                <a class="code-card-title" href={project.href}>{project.title}</a>
+                            ) : (
+                                <h3 class="code-card-title">{project.title}</h3>
+                            )}
+                            <p class="code-role"><span>Involvement:</span> {project.role}</p>
+                        </div>
+                        <div class="code-status-row">
+                            {project.status && <span>{project.status}</span>}
+                        </div>
+                    </div>
+                    <p class="code-description">{project.description}</p>
+                    <div class="code-tags">
+                        {project.stack.map((tag) => <span>{tag}</span>)}
+                    </div>
+                    {project.links && (
+                        <div class="code-links">
+                            {project.links.map((link) => (
+                                <a href={link.href} target="_blank" rel="noopener noreferrer" title={link.label} aria-label={link.label}>
+                                    <Icon name={getLinkIcon(link)} size={15} />
+                                    <span>{link.label}</span>
+                                </a>
+                            ))}
+                        </div>
+                    )}
+                </article>
+            ))}
+        </div>
+    </section>
+
+    <section class="code-section">
+        <div class="code-section-heading">
+            <h2>RSE Work At VU</h2>
+            <p>Research software engineering projects at VU Amsterdam that I am involved in or contribute to.</p>
+        </div>
+        <div class="code-grid">
+            {vuEngineering.map((project) => (
+                <article class="code-card">
+                    <div class="code-card-top">
+                        <div>
+                            <h3 class="code-card-title">{project.title}</h3>
+                            <p class="code-role"><span>Involvement:</span> {project.role}</p>
+                        </div>
+                        <div class="code-status-row">
+                            {project.status && <span>{project.status}</span>}
+                        </div>
+                    </div>
+                    <p class="code-description">{project.description}</p>
+                    <div class="code-tags">
+                        {project.stack.map((tag) => <span>{tag}</span>)}
+                    </div>
+                    {project.links && (
+                        <div class="code-links">
+                            {project.links.map((link) => (
+                                <a href={link.href} target="_blank" rel="noopener noreferrer" title={link.label} aria-label={link.label}>
+                                    <Icon name={getLinkIcon(link)} size={15} />
+                                    <span>{link.label}</span>
+                                </a>
+                            ))}
+                        </div>
+                    )}
+                </article>
+            ))}
+        </div>
+    </section>
+
+    <section class="code-section">
+        <div class="code-section-heading">
+            <h2>HPC Infrastructure</h2>
+            <p>Cluster automation, CI/CD, deployment, and user-facing HPC environments.</p>
+        </div>
+        <div class="code-grid">
+            {hpcInfrastructure.map((project) => (
+                <article class="code-card">
+                    <div class="code-card-top">
+                        <div>
+                            <h3 class="code-card-title">{project.title}</h3>
+                            <p class="code-role"><span>Involvement:</span> {project.role}</p>
+                        </div>
+                        <div class="code-status-row">
+                            {project.status && <span>{project.status}</span>}
+                        </div>
+                    </div>
+                    <p class="code-description">{project.description}</p>
+                    <div class="code-tags">
+                        {project.stack.map((tag) => <span>{tag}</span>)}
+                    </div>
+                    {project.links && (
+                        <div class="code-links">
+                            {project.links.map((link) => (
+                                <a href={link.href} target="_blank" rel="noopener noreferrer" title={link.label} aria-label={link.label}>
+                                    <Icon name={getLinkIcon(link)} size={15} />
+                                    <span>{link.label}</span>
+                                </a>
+                            ))}
+                        </div>
+                    )}
+                </article>
+            ))}
+        </div>
+    </section>
+
+    <section class="code-section">
+        <div class="code-section-heading">
+            <h2>Other Public Contributions</h2>
+            <p>Smaller public contributions and related repositories.</p>
+        </div>
+        <div class="contribution-list">
+            {publicContributions.map((item) => (
+                <a class="contribution-row" href={item.href} target="_blank" rel="noopener noreferrer">
+                    <span class="contribution-group">{item.group}</span>
+                    <span class="contribution-name">{item.name}</span>
+                    <span class="contribution-note">{item.note}</span>
+                </a>
+            ))}
+        </div>
+    </section>
+</BaseLayout>

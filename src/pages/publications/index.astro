@@ -1,0 +1,54 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { PAGES } from "../../config";
+
+if (PAGES.publications.isActive === false) {
+  return Astro.redirect("/404");
+}
+
+const publications = (await getCollection("publications")).sort((a, b) => {
+  const dateA = a.data.date ? new Date(a.data.date).getTime() : 0;
+  const dateB = b.data.date ? new Date(b.data.date).getTime() : 0;
+  return dateB - dateA;
+});
+
+const year = (date?: string) => date ? new Date(date).getFullYear() : undefined;
+const doiUrl = (doi?: string) => doi ? `https://doi.org/${doi}` : undefined;
+---
+
+<BaseLayout title={PAGES.publications.title}>
+  <header class="page-header">
+    <h1 class="page-title">{PAGES.publications.title}</h1>
+    <p class="page-subtitle">{PAGES.publications.subtitle}</p>
+  </header>
+
+  <section class="publication-scroll" aria-label="Publication list">
+    {
+      publications.map((publication) => {
+        const primaryHref = publication.data.arxiv_url || publication.data.external_url || `/publications/${publication.id}`;
+        return (
+          <article class="publication-item">
+            <div class="publication-main">
+              <a class="publication-title" href={primaryHref}>
+                {publication.data.title}
+              </a>
+              {publication.data.author && <p class="publication-authors">{publication.data.author}</p>}
+              <p class="publication-venue">
+                {[publication.data.journal, year(publication.data.date)].filter(Boolean).join(" · ")}
+              </p>
+              {publication.data.description && (
+                <p class="publication-desc">{publication.data.description}</p>
+              )}
+            </div>
+            <div class="publication-links" aria-label={`${publication.data.title} links`}>
+              {publication.data.arxiv_url && <a href={publication.data.arxiv_url}>arXiv</a>}
+              {publication.data.pdf_url && <a href={publication.data.pdf_url}>PDF</a>}
+              {publication.data.doi && <a href={doiUrl(publication.data.doi)}>DOI</a>}
+            </div>
+          </article>
+        );
+      })
+    }
+  </section>
+</BaseLayout>

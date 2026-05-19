@@ -1,0 +1,14 @@
+node_modules
+dist
+.astro
+.DS_Store
+*.local
+
+# Local source-maintenance notes and generated helper outputs.
+information.md
+gitlab-projects-with-my-commits.tsv
+test.sh
+
+# Raw photo inputs live outside the packaged site. Commit optimized/public
+# assets from public/images/ instead.
+/profile_photo.*
