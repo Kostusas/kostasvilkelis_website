@@ -36,7 +36,7 @@ const { items } = Astro.props;
                     </div>
                     {item.description && (
                         <div class="body mt-2">
-                            {item.description}
+                            <Fragment set:html={item.description} />
                         </div>
                     )}
                     {item.thesis && (

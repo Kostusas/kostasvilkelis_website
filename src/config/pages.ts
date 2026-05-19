@@ -7,7 +7,7 @@ export const PAGES: PagesConfig = {
     isActive: true,
   },
   blog: {
-    title: "Blog",
+    title: "Posts",
     subtitle: "Notes on research software and numerical methods.",
     isActive: true,
   },
@@ -22,7 +22,7 @@ export const PAGES: PagesConfig = {
     isActive: false,
   },
   projects: {
-    title: "Code",
+    title: "Projects",
     subtitle: "Research software, open-source work, and public contributions.",
     isActive: true,
   },

@@ -2,22 +2,22 @@
 name: "Kostas Vilkelis"
 title: "Research software engineer"
 experience:
-  - role: "Research software engineer"
+  - role: "HPC Systems Engineer / Research software engineer"
     institution: "VU Amsterdam"
     period: "Current"
-    description: "Research software engineering for numerical simulations, scientific Python tooling, and computational physics workflows."
+    description: "Developed <a href=\"https://rdm.vu.nl/tools/ada/index.html\" target=\"_blank\" rel=\"noopener noreferrer\">ADA</a>, VU Amsterdam's HPC cluster; worked with researchers on various computational projects."
   - role: "Postdoctoral researcher"
     institution: "Technische Universiteit Delft"
-    period: "2024-2026"
-    description: "Research and software development for computational condensed matter physics and open-source scientific computing workflows."
+    period: "2024"
+    description: "Conducted theoretical and computational research in condensed matter physics in the <a href=\"https://quantumtinkerer.tudelft.nl\" target=\"_blank\" rel=\"noopener noreferrer\">Quantum Tinkerer group</a>."
   - role: "Doctoral researcher"
     institution: "Technische Universiteit Delft"
     period: "2019-2024"
-    description: "Doctoral research in computational physics, topological materials, mesoscopic physics, and research code development."
+    description: "Conducted theoretical and computational research in condensed matter physics in the <a href=\"https://quantumtinkerer.tudelft.nl\" target=\"_blank\" rel=\"noopener noreferrer\">Quantum Tinkerer group</a>."
   - role: "Intern researcher"
-    institution: "NTT Basic Research Laboratories"
+    institution: "NTT Basic Research Laboratories, Japan."
     period: "2017-2018"
-    description: "Research internship in Atsugi, Japan."
+    description: "Experimentally studied Quantum Spin Hall physics in two-dimensional samples using laser techniques."
   - role: "Intern researcher"
     institution: "Dr. J. Olof Johansson Research Group, University of Edinburgh"
     period: "2016"
@@ -43,12 +43,6 @@ education:
 
 - Lecturer and instructor, Casimir programming course, 2022.
 - Teaching assistant and notes co-developer, Solid state physics bachelor course, 2020-2023.
-
-## Open-source software
-
-- **MeanFi**: a Python package for self-consistent Hartree-Fock calculations on tight-binding models.
-- **pyDACP**: a Python package to compute eigenvalues using the dual applications of Chebyshev polynomials algorithm.
-- **dask-quantumtinkerer**: an API connecting the Quantum Tinkerer JupyterHub with HPC resources using Dask.
 
 ## Academic supervision
 
