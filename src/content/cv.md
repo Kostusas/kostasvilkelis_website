@@ -4,7 +4,7 @@ title: "Research software engineer"
 experience:
   - role: "HPC Systems Engineer / Research software engineer"
     institution: "VU Amsterdam"
-    period: "Current"
+    period: "2024-Current"
     description: "Developed <a href=\"https://rdm.vu.nl/tools/ada/index.html\" target=\"_blank\" rel=\"noopener noreferrer\">ADA</a>, VU Amsterdam's HPC cluster; worked with researchers on various computational projects."
   - role: "Postdoctoral researcher"
     institution: "Technische Universiteit Delft"

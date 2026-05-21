@@ -38,7 +38,7 @@ export const PAGES: PagesConfig = {
   },
   cv: {
     title: "CV",
-    subtitle: "A preliminary professional overview.",
+    subtitle: "Professional overview.",
     isActive: true,
   },
 };
