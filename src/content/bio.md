@@ -1,6 +1,6 @@
 ---
 name: "Kostas Vilkelis"
-avatar: "images/profile_photo.jpg"
+avatar: "images/profile_photo.png"
 shortBio: "Computational physicist & research software engineer"
 institution: "VU Amsterdam"
 ---
